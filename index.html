@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dharshini's Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .gallery {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        .gallery img {
+            width: 100vw;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        .chatbot-container {
+            position: fixed;
+            bottom: 0;
+            right: 20px;
+            width: 300px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .chatbot-header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .chatbot-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .chatbot-input input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .chatbot-input button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to The Spice Route</h1>
+
+    <!-- Image Gallery -->
+    <div class="gallery">
+        <img src="1.png" alt="Image 1">
+        <img src="2.png" alt="Image 2">
+        <img src="3.png" alt="Image 3">
+        <img src="4.png" alt="Image 4">
+        <img src="5.png" alt="Image 5">
+        <img src="6.png" alt="Image 6">
+        <img src="7.png" alt="Image 7">
+        <img src="8.png" alt="Image 8">
+        <img src="9.png" alt="Image 9">
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-header">Chat with me</div>
+        <div class="chatbot-messages" id="chatbot-messages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Ask something..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatbotMessages = document.getElementById('chatbot-messages');
+
+        function sendMessage() {
+            const input = document.getElementById('chatbot-input');
+            const userMessage = input.value;
+
+            if (userMessage.trim() !== '') {
+                displayMessage(userMessage, 'user');
+                generateBotResponse(userMessage);
+                input.value = ''; // Clear input field
+            }
+        }
+
+        function displayMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messageElement.style.padding = '10px';
+            messageElement.style.margin = '10px 0';
+            messageElement.style.borderRadius = '10px';
+
+            if (sender === 'user') {
+                messageElement.style.backgroundColor = '#007BFF';
+                messageElement.style.color = 'white';
+                messageElement.style.textAlign = 'right';
+            } else {
+                messageElement.style.backgroundColor = '#f0f0f0';
+                messageElement.style.color = 'black';
+                messageElement.style.textAlign = 'left';
+            }
+
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll to the bottom
+        }
+
+        function generateBotResponse(userMessage) {
+            let botResponse = '';
+
+            if (userMessage.toLowerCase().includes('hello') || userMessage.toLowerCase().includes('hi')) {
+                botResponse = 'Hello! How can I assist you today?';
+            } else if (userMessage.toLowerCase().includes('what is this about')) {
+                botResponse = 'This website showcases various items and services related to Indian Fling, a culinary experience with authentic Indian dishes.';
+            } else if (userMessage.toLowerCase().includes('indian fling')) {
+                botResponse = 'Indian Fling is a traditional Indian food festival offering a wide variety of authentic Indian dishes.';
+            } else if (userMessage.toLowerCase().includes('menu')) {
+                botResponse = 'Our menu includes dishes like Biryani, Masala Dosa, Butter Chicken, Paneer Tikka, and more!';
+            } else if (userMessage.toLowerCase().includes('where') || userMessage.toLowerCase().includes('location')) {
+                botResponse = 'We are located at 123 Culinary Street, Foodie Town.';
+            } else if (userMessage.toLowerCase().includes('items')) {
+                botResponse = 'We offer a variety of dishes including starters, main courses, and desserts. Please check our menu for more details.';
+            } else {
+                botResponse = 'I\'m not sure about that. Could you please ask something else?';
+            }
+
+            displayMessage(botResponse, 'bot');
+        }
+    </script>
+
+</body>
+</html>
